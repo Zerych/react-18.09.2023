@@ -5,5 +5,4 @@
 /httpRequests/
 
 
-modules.xml
-*.iml
+/.idea
