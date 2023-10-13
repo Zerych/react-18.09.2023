@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "02-waiters-api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

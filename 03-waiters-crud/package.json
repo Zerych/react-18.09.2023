@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "03-waiters-crud",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
