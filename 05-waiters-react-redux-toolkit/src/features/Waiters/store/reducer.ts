@@ -4,21 +4,21 @@ import {WaiterI} from "../type";
 
 const DEFAULT_WAITER: WaiterI = {
     firstName: '',
-    phone: '',
+    phone: ''
 }
 
 interface WaiterStateI {
     editingWaiter: WaiterI,
     list: WaiterI[],
     listLoading: boolean,
-    listError?: Error,
+    listError?: Error
 }
 
 const initialState: WaiterStateI = {
     editingWaiter: DEFAULT_WAITER,
     list: [],
     listLoading: false,
-    listError: undefined,
+    listError: undefined
 }
 
 export const waiterSlice = createSlice({

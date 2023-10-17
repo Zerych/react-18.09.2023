@@ -24,7 +24,7 @@ export function WaiterRow({waiter}: WaiterPropsI) {
 
             try {
                 // @ts-ignore
-               await dispatch(removeItem(waiter.id))
+                await dispatch(removeItem(waiter.id))
             } catch (e: any) {
                 setError(e.message)
             } finally {
