@@ -1,6 +1,8 @@
-import {applyMiddleware, createStore} from 'redux'
-import {reducer as rootReducer} from './reducer'
-import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+import {configureStore} from '@reduxjs/toolkit'
+import {reducer as waiterReducer} from "../features/Waiters/store/reducer";
 
-export const store = createStore(rootReducer, applyMiddleware(thunk, logger))
+export const store = configureStore({
+    reducer: {
+        todo: waiterReducer,
+    },
+})
