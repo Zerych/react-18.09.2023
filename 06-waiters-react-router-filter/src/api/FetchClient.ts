@@ -26,6 +26,14 @@ export class FetchClient<T> {
         throw new Error(response.statusText)
     }
 
+    async get(id: number): Promise<T> {
+        try {
+            return await this.request<T>(String(id))
+        } catch (e: any) {
+            throw Error(`Can't fetch item from server: ${e.message}`)
+        }
+    }
+
     async getList(): Promise<T[]> {
         try {
             return await this.request<T[]>()

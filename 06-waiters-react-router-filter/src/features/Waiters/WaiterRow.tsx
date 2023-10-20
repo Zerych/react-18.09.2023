@@ -3,6 +3,7 @@ import {WaiterI} from "./type";
 import {useDispatch} from "react-redux";
 import {removeItem} from "./store/thunks";
 import {setEditingItemAction} from "./store/reducer";
+import {Link} from "react-router-dom";
 
 interface WaiterPropsI {
     waiter: WaiterI;
@@ -39,7 +40,9 @@ export function WaiterRow({waiter}: WaiterPropsI) {
             <td>{waiter.firstName}</td>
             <td>{waiter.phone}</td>
             <td>
-                <button onClick={onEditBtnClick} disabled={loading}>Edit</button>
+                <Link to={`/waiters/edit/${waiter.id}`}>
+                    <button disabled={loading}>Edit</button>
+                </Link>
                 <button onClick={onDeleteBtnClick} disabled={loading}>Delete</button>
                 {error && <span style={{color: 'red'}}>{error}</span>}
             </td>

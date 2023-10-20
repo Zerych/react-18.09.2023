@@ -1,5 +1,8 @@
 import {
     createItemAction,
+    getEditingItemActionError,
+    getEditingItemActionLoading,
+    getEditingItemActionSuccess,
     getListActionError,
     getListActionLoading,
     getListActionSuccess,
@@ -19,8 +22,20 @@ export function getList() {
                 dispatch(getListActionSuccess(waiterList))
             })
             .catch((error) => {
-                dispatch(getListActionError(error))
+                dispatch(getListActionError(error.message))
             })
+    }
+}
+
+export function getEditingItem(id: number) {
+    return async (dispatch: any) => {
+        dispatch(getEditingItemActionLoading())
+        try {
+            const waiter = await WaiterApi.get(id)
+            dispatch(getEditingItemActionSuccess(waiter))
+        } catch (error: any) {
+            dispatch(getEditingItemActionError(error.message))
+        }
     }
 }
 

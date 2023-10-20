@@ -6,3 +6,5 @@ export const store = configureStore({
         waiter: waiterReducer,
     },
 })
+
+export type RootState = ReturnType<typeof store.getState>

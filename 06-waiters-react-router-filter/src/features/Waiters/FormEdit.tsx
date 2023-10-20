@@ -1,25 +1,40 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {saveItem} from "./store/thunks";
+import {getEditingItem, saveItem} from "./store/thunks";
+import {useNavigate, useParams} from "react-router-dom";
+import {editingWaiterCombinedSelector} from "./store/selectors";
+import {DEFAULT_WAITER, setEditingItemAction} from "./store/reducer";
+import {Page} from "../../components/Page";
 
 export function FormEdit() {
+    let {id} = useParams();
     const dispatch = useDispatch()
-    const waiter = useSelector((state: any) => state.waiter.editingWaiter)
-    const [firstName, setFirstName] = useState(waiter.firstName)
-    const [phone, setPhone] = useState(waiter.phone)
+    const navigate = useNavigate();
+    const {editingWaiter, editingWaiterLoading, editingWaiterError} = useSelector(editingWaiterCombinedSelector)
+    const [firstName, setFirstName] = useState(editingWaiter.firstName)
+    const [phone, setPhone] = useState(editingWaiter.phone)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
     useEffect(() => {
-        setFirstName(waiter.firstName)
-        setPhone(waiter.phone)
-    }, [waiter])
+        if (id) {
+            // @ts-ignore
+            dispatch(getEditingItem(id))
+        } else {
+            dispatch(setEditingItemAction(DEFAULT_WAITER))
+        }
+    }, [id]);
+
+    useEffect(() => {
+        setFirstName(editingWaiter.firstName)
+        setPhone(editingWaiter.phone)
+    }, [editingWaiter])
 
     const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const newWaiter = {
-            ...waiter,
+            ...editingWaiter,
             firstName,
             phone,
         }
@@ -29,7 +44,8 @@ export function FormEdit() {
 
         try {
             // @ts-ignore
-           await dispatch(saveItem(newWaiter))
+            await dispatch(saveItem(newWaiter))
+            navigate("/waiters");
         } catch (e: any) {
             setError(e.message)
         } finally {
@@ -38,7 +54,11 @@ export function FormEdit() {
     }
 
     return (
-        <>
+        <Page
+            title='Edit Form'
+            loading={editingWaiterLoading}
+            error={editingWaiterError}
+        >
             <form onSubmit={onFormSubmit}>
                 <div>
                     <label htmlFor="firstName">First Name</label>
@@ -53,6 +73,6 @@ export function FormEdit() {
                 <button type="submit" disabled={loading}>Submit</button>
             </form>
             {error && <div style={{color: 'red'}}>{error}</div>}
-        </>
+        </Page>
     )
 }
