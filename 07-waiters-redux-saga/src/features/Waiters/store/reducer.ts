@@ -35,7 +35,7 @@ export const waiterSlice = createSlice({
         setFilterAction: (state: WaiterStateI, action: PayloadAction<FILTER>) => {
             state.filter = action.payload
         },
-        getListActionLoading: (state: WaiterStateI) => {
+        getListActionRequest: (state: WaiterStateI) => {
             state.listLoading = true
             state.listError = ''
         },
@@ -79,7 +79,7 @@ export const waiterSlice = createSlice({
 export const {actions, reducer} = waiterSlice
 export const {
     setFilterAction,
-    getListActionLoading,
+    getListActionRequest,
     getListActionSuccess,
     getListActionError,
     getEditingItemActionLoading,

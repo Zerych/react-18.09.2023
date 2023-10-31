@@ -3,29 +3,11 @@ import {
     getEditingItemActionError,
     getEditingItemActionLoading,
     getEditingItemActionSuccess,
-    getListActionError,
-    getListActionLoading,
-    getListActionSuccess,
     removeItemAction,
     updateItemAction,
 } from "./reducer";
 import {WaiterApi} from "../api/server";
 import {WaiterI} from "../type";
-
-export function getList() {
-    return (dispatch: any) => {
-        dispatch(getListActionLoading())
-
-        WaiterApi
-            .getList()
-            .then((waiterList) => {
-                dispatch(getListActionSuccess(waiterList))
-            })
-            .catch((error) => {
-                dispatch(getListActionError(error.message))
-            })
-    }
-}
 
 export function getEditingItem(id: number) {
     return async (dispatch: any) => {
