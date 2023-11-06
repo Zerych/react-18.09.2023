@@ -5,6 +5,11 @@ import {useNavigate, useParams} from "react-router-dom";
 import {editingWaiterCombinedSelector} from "./store/selectors";
 import {DEFAULT_WAITER, setEditingItemAction} from "./store/reducer";
 import {Page} from "../../components/Page";
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
 export function FormEdit() {
     let {id} = useParams();
@@ -53,26 +58,52 @@ export function FormEdit() {
         }
     }
 
+    // @ts-ignore
     return (
         <Page
             title='Edit Form'
             loading={editingWaiterLoading}
             error={editingWaiterError}
         >
-            <form onSubmit={onFormSubmit}>
-                <div>
-                    <label htmlFor="firstName">First Name</label>
-                    <input value={firstName} onChange={e => setFirstName(e.target.value)} type="text" id="firstName"/>
-                </div>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+            }}>
+                <Paper
+                    sx={{
+                        padding: '10px',
+                        width: '50ch',
+                    }}
+                >
+                    <Stack
+                        component="form"
+                        spacing={2}
+                        noValidate
+                        autoComplete="off"
+                        onSubmit={onFormSubmit}
+                    >
+                        <TextField
+                            required
+                            id="firstName"
+                            label="First Name"
+                            value={firstName}
+                            onChange={e => setFirstName(e.target.value)}
+                        />
 
-                <div>
-                    <label htmlFor="phone">Phone</label>
-                    <input value={phone} onChange={e => setPhone(e.target.value)} type="text" id="phone"/>
-                </div>
+                        <TextField
+                            required
+                            id="phone"
+                            label="Phone"
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                        />
 
-                <button type="submit" disabled={loading}>Submit</button>
-            </form>
-            {error && <div style={{color: 'red'}}>{error}</div>}
+                        <Button type="submit" disabled={loading} variant="outlined">Submit</Button>
+                    </Stack>
+
+                    {error && <div style={{color: 'red'}}>{error}</div>}
+                </Paper>
+            </Box>
         </Page>
     )
 }

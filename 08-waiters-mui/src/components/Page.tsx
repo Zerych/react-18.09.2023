@@ -1,21 +1,25 @@
 import React from 'react';
 import {Loading} from "./Loading";
 import {Alert} from "./Alert";
+import {Typography} from "@mui/material";
+import Stack from '@mui/material/Stack';
 
 interface PropsI {
     title: string,
     loading?: boolean,
     error?: string,
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 export function Page({title, error, loading, children}: PropsI) {
     return (
-        <div>
-            <h1 style={{marginBottom: '20px'}}>{title}</h1>
+        <Stack spacing={2}>
+            <Typography variant="h4" component="h1">
+                {title}
+            </Typography>
             {loading && <Loading/>}
             {error && <Alert message={error}/>}
             {!loading && !error && children}
-        </div>
+        </Stack>
     )
 }

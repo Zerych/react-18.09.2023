@@ -1,5 +1,7 @@
 import {delay} from '../utils'
 
+export const DELETE = 'delete';
+
 export class FetchClient<T> {
     url: string
     delay: number = 500
@@ -58,7 +60,7 @@ export class FetchClient<T> {
         }
     }
 
-    async delete(id: number): Promise<void> {
+    async [DELETE](id: number): Promise<void> {
         try {
             await this.request<void>(String(id), 'DELETE')
         } catch (e: any) {

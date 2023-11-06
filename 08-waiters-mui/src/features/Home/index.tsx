@@ -1,5 +1,7 @@
+import {Page} from "../../components/Page";
+
 export function Home() {
     return (
-        <h1>Home Page</h1>
+        <Page title='Home Page'/>
     )
 }

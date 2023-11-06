@@ -76,6 +76,16 @@ export const waiterSlice = createSlice({
     },
 })
 
+export const removeItemRequestType = `${waiterSlice.name}/removeItemRequest`
+export const removeItemRequest = (id: number, resolve: any, reject: any) => ({
+    type: removeItemRequestType,
+    payload: {
+        id,
+        resolve,
+        reject,
+    },
+})
+
 export const {actions, reducer} = waiterSlice
 export const {
     setFilterAction,

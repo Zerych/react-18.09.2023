@@ -1,5 +1,7 @@
+import {Page} from "../../components/Page";
+
 export function NotFound() {
     return (
-        <h1>404 Not Found</h1>
+        <Page title='404 Not Found'/>
     )
 }
